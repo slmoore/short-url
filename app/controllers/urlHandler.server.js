@@ -28,7 +28,7 @@ function UrlHandler () {
                 });
 				//display options as JSON
 				res.json({
-				    "original_url": req.protocol+'://'+req.hostname+'/'+site.longSite,
+				    "original_url": site.longSite,
 				    "short_url": req.protocol+'://'+req.hostname+'/'+site.shortSite
 				});
 			} else {
