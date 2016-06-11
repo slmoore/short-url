@@ -12,3 +12,7 @@
 <div><code>https://smoore-short-url.herokuapp.com/new/https://www.google.com/</code></div>
 ##Sample results
 <div><code>{"original_url":"https://www.google.com/", "short_url":"https://smoore-short-url.herokuapp.com/8170"}</code></div>
+##The short_url
+<div><code>https://smoore-short-url.herokuapp.com/8170</code></div>
+##Redirects to the original_url
+<div><code>https://www.google.com/</code></div>
