@@ -4,11 +4,9 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var Url = new Schema({
-	original: {
-	    id: String,
-	    displayName: String,
-	    username: String,
-        publicRepos: Number
+	site: {
+	    longSite: String,
+	    shortSite: Number
 	}
 });
 
