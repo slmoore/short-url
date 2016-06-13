@@ -12,38 +12,54 @@ function UrlHandler () {
 			if (validator.isURL(url)) {
 				console.log("valid url");
 				//find if it already exists
-				
-				//otherwise insert
-				//setup record
-    			site = new Urls();
-    			site.longSite = url;
-    			site.shortSite = 1234;
-    			//insert record
-                site.save(function (err) {
-                  if (err) {
-                    console.log(err);
-                  } else {
-                    console.log('new site saved');
-                  }
-                });
-				//display options as JSON
-				res.json({
-				    "original_url": site.longSite,
-				    "short_url": req.protocol+'://'+req.hostname+'/'+site.shortSite
+				Urls.findOne({ longSite: url }, function(err,data) {
+					if (err) {
+						return res.status('500').send(err.message);
+					}
+					if (data) {
+						return res.json({
+				    	"original_url": data.longSite,
+				    	"short_url": req.protocol+'://'+req.hostname+'/'+data.shortSite
+						});
+					} else {
+						//otherwise setup new document
+		  			site = new Urls();
+		  			site.longSite = url;
+		  			site.shortSite = 1234;
+		  			//insert document
+		        site.save(function (err) {
+		          if (err) {
+		            return res.status('500').send(err.message);
+		          } else {
+		            console.log('new site saved');
+		          }
+		        });
+						//display options as JSON
+						return res.json({
+					    "original_url": site.longSite,
+					    "short_url": req.protocol+'://'+req.hostname+'/'+site.shortSite
+						});
+					}
 				});
 			} else {
-				res.status(500).send('Invalid URL, try again!');
+				return res.status('500').send('Invalid URL. Please try again!');
 			}
-			
 		};
 
+  //redirect to the original url
 	this.select = function (req, res) {
-		/*Urls.findOne()
-			.exec(function (err, result) {
-				if (err) { throw err; }
-
-				res.json(result.nbrClicks);
-			});*/
+		Urls.find({ shortSite: req.path.substring(1) })
+		  .limit(1)
+		  .exec(function (err, data) {
+				if (err) { 
+					return res.status('500').send(err.message);
+				}
+				if (data.length) {
+				  return res.redirect(data[0].longSite);
+				}
+				
+				return res.status('404').send('Unknown location. Please try again!');
+			});
 	};
 
 }

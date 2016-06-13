@@ -13,11 +13,17 @@ module.exports = function (app) {
 		});
 
 	//redirect to original url value matching integer key
-	app.route('/:id')
+	app.route(/^\/[0-9]+$/)
 		.get(urlHandler.select);
 
     //insert url passed as parameter to database
 	app.route('/new/*')
 		.get(urlHandler.insert);
+
+    //default unknown
+	app.route('*')
+		.get(function(req,res) {
+			res.sendStatus('404');
+		});
 
 };
