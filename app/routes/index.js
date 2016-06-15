@@ -20,6 +20,25 @@ module.exports = function (app) {
 	app.route('/new/*')
 		.get(urlHandler.insert);
 
+/*	Used for Testing Purposes Only
+
+    //select all urls from the database
+	app.route('/selectall')
+		.get(urlHandler.selectAll);
+
+    //clear all urls from the database
+	app.route('/clear')
+		.get(urlHandler.clear);
+
+    //select all counters from the database
+	app.route('/selectallcounter')
+		.get(urlHandler.selectAllCounter);
+		
+    //clear all counters from the database
+	app.route('/clearcounter')
+		.get(urlHandler.clearCounter);
+*/
+
     //default unknown
 	app.route('*')
 		.get(function(req,res) {
