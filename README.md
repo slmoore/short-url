@@ -18,8 +18,8 @@
 <h3>Sample results</h3>
 <div><code>{"original_url":"http://www.google.com/", "short_url":"https://smoore-short-url.herokuapp.com/3"}</code></div>
 
-<h3>short_url</h3>
-<code>https://smoore-short-url.herokuapp.com/3</code> 
+<h3>example short_url</h3>
+<code>"https://smoore-short-url.herokuapp.com/3"</code> 
 
-<h3>takes you to the original_url</h3>
-<code>http://www.google.com/</code>
+<h3>takes you to the example original_url</h3>
+<code>"http://www.google.com/"</code>
